@@ -46,6 +46,10 @@ export type MapState = {
      */
     sentinel2AquisitionMonth?: number;
     /**
+     * The day that will be used to fetch sentinel-2 imagery layer
+     */
+    sentinel2AquisitionDay?: number;
+    /**
      * Represents the level of detail (LOD) at the center of the view.
      */
     zoom?: number;
@@ -65,6 +69,8 @@ export type MapState = {
     swipeWidget?: {
         year4LeadingLayer?: number;
         year4TrailingLayer?: number;
+        day4LeadingLayer?: number;
+        day4TrailingLayer?: number;
         position?: number;
     };
     /**
@@ -91,6 +97,7 @@ export const initialMapState: MapState = {
     year: null,
     shouldShowSentinel2Layer: false,
     sentinel2AquisitionMonth: 9,
+    sentinel2AquisitionDay: 1,
     zoom: 11,
     center: null,
     resolution: null,
@@ -99,7 +106,7 @@ export const initialMapState: MapState = {
     activeLandCoverType: null,
     showMapLabel: true,
     showTerrain: true,
-    sentinel2RasterFunction: 'Natural Color with DRA',
+    sentinel2RasterFunction: 'None',
 };
 
 const slice = createSlice({
@@ -117,6 +124,12 @@ const slice = createSlice({
         },
         year4TrailingLayerUpdated: (state, action: PayloadAction<number>) => {
             state.swipeWidget.year4TrailingLayer = action.payload;
+        },
+        day4LeadingLayerUpdated: (state, action: PayloadAction<number>) => {
+            state.swipeWidget.day4LeadingLayer = action.payload;
+        },
+        day4TrailingLayerUpdated: (state, action: PayloadAction<number>) => {
+            state.swipeWidget.day4TrailingLayer = action.payload;
         },
         resolutionUpdated: (state, action: PayloadAction<number>) => {
             state.resolution = action.payload;
@@ -163,6 +176,12 @@ const slice = createSlice({
         ) => {
             state.sentinel2AquisitionMonth = action.payload;
         },
+        sentinel2AquisitionDayChanged: (
+            state,
+            action: PayloadAction<number>
+        ) => {
+            state.sentinel2AquisitionDay = action.payload;
+        },
     },
 });
 
@@ -173,6 +192,8 @@ export const {
     yearUpdated,
     year4LeadingLayerUpdated,
     year4TrailingLayerUpdated,
+    day4LeadingLayerUpdated,
+    day4TrailingLayerUpdated,
     resolutionUpdated,
     extentUpdated,
     shouldShowSentinel2LayerToggled,
@@ -184,6 +205,7 @@ export const {
     zoomUpdated,
     sentinel2RasterFunctionChanged,
     sentinel2AquisitionMonthChanged,
+    sentinel2AquisitionDayChanged,
 } = slice.actions;
 
 export default reducer;

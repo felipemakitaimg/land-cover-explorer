@@ -18,7 +18,10 @@ import {
 } from '../utils/URLHashParams';
 import { DEFAULT_MAP_CENTERS, DEFAULT_MAP_ZOOM } from '../constants/map';
 import { LandCoverClassification } from '../services/sentinel-2-10m-landcover/rasterAttributeTable';
-import { getAvailableYears } from '../services/sentinel-2-10m-landcover/timeInfo';
+import {
+    getAvailableYears,
+    getAvailableDays,
+} from '../services/sentinel-2-10m-landcover/timeInfo';
 import { Sentinel2RasterFunction } from '../components/ControlPanel/Sentinel2LayerRasterFunctionsList/Sentinel2LayerRasterFunctionsListContainer';
 import { miscFns } from 'helper-toolkit-ts';
 
@@ -28,8 +31,7 @@ const isMobileView = miscFns.isMobileDevice();
  * Get a map center from list of default map centers randomly
  */
 const getMapCenterFromDefaultLocations = () => {
-    const randomIdx = Math.floor(Math.random() * DEFAULT_MAP_CENTERS.length);
-    const [lon, lat] = DEFAULT_MAP_CENTERS[randomIdx];
+    const [lon, lat] = DEFAULT_MAP_CENTERS[0];
     return {
         lon,
         lat,
@@ -38,6 +40,7 @@ const getMapCenterFromDefaultLocations = () => {
 
 const getPreloadedMapState = (): MapState => {
     const availableYears = getAvailableYears();
+    const availableDays = getAvailableDays();
 
     const mapCenterInfo = getMapCenterFromHashParams();
     const timeExtent = getTimeExtentFromHashParams();
@@ -51,7 +54,7 @@ const getPreloadedMapState = (): MapState => {
 
     const sentinel2RasterFunction =
         (getSentinel2RasterFunctionFromHashParams() as Sentinel2RasterFunction) ||
-        'Natural Color with DRA';
+        'None';
 
     const startYear = timeExtent?.startYear || availableYears[0];
     const endYear =

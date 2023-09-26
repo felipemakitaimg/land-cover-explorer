@@ -25,6 +25,7 @@ import HeaderText from '../HeaderText/HeaderText';
 import AnimationButton from './AnimationButton';
 import ModeSelector from './ModeSelector';
 import MonthPicker from './MonthPicker';
+import DayPicker from './DayPicker';
 import TimeSliderWidget from './TimeSliderWidget';
 import TimeSelector4SwipeMode from './TimeSelector4SwipeMode';
 
@@ -53,6 +54,9 @@ const TimeSliderContainer = () => {
     const shouldShowMonthPicker =
         shouldShowSentinel2Layer && isSentinel2LayerOutOfVisibleRange === false;
 
+    const shouldShowDayPicker =
+        shouldShowSentinel2Layer && isSentinel2LayerOutOfVisibleRange === false;
+
     const timeRangeSliderVisibility =
         mode === 'swipe' && isSentinel2LayerOutOfVisibleRange === false;
 
@@ -77,8 +81,8 @@ const TimeSliderContainer = () => {
                 }`}
                 subTitle={
                     mode === 'swipe'
-                        ? 'Choose Two Years to Compare'
-                        : 'Choose a Year to View'
+                        ? 'Escolha duas datas para comparar'
+                        : 'Escolha uma data para visualizar'
                 }
             />
 
@@ -117,6 +121,7 @@ const TimeSliderContainer = () => {
                     mode === 'swipe' && (
                         <TimeSelector4SwipeMode
                             shouldShowMonthPicker={shouldShowMonthPicker}
+                            shouldShowDayPicker={shouldShowDayPicker}
                         />
                     )}
 
@@ -142,6 +147,11 @@ const TimeSliderContainer = () => {
                             >
                                 {shouldShowMonthPicker && (
                                     <MonthPicker
+                                        disabled={animationMode !== null}
+                                    />
+                                )}
+                                {shouldShowDayPicker && (
+                                    <DayPicker
                                         disabled={animationMode !== null}
                                     />
                                 )}

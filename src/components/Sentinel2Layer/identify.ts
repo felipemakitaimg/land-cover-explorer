@@ -2,10 +2,7 @@ import { Sentinel2RasterFunction } from '../ControlPanel/Sentinel2LayerRasterFun
 
 import IPoint from 'esri/geometry/Point';
 import { getMosaicRuleByAcquisitionDate } from './exportImage';
-import {
-    SENTINEL_2_IMAGE_SERVICE_FIELD_NAMES,
-    SENTINEL_2_IMAGE_SERVICE_URL,
-} from './config';
+import { SENTINEL_2_IMAGE_SERVICE_URL } from './config';
 
 type IdentifyParams = {
     geometry: IPoint;

@@ -20,6 +20,22 @@ export const selectYearsForSwipeWidgetLayers = createSelector(
 );
 
 /**
+ * Select days that will be used to get the Leading and Trailing layers in Swipe Widget
+ *
+ * @return `[day4LeadingLayer, day4TrailingLayer]`
+ */
+export const selectDaysForSwipeWidgetLayers = createSelector(
+    (state: RootState) => state.Map.swipeWidget.day4LeadingLayer,
+    (state: RootState) => state.Map.swipeWidget.day4TrailingLayer,
+    (day4LeadingLayer, day4TrailingLayer) => {
+        return {
+            day4LeadingLayer,
+            day4TrailingLayer,
+        };
+    }
+);
+
+/**
  * Select default values (zoom and center) that will be used to initiate map
  *
  * @return `{ zoom: number, cenetr: {lat: number, lon: number} }`
@@ -88,6 +104,11 @@ export const selectIsSentinel2LayerOutOfVisibleRange = createSelector(
 export const selectSentinel2AquisitionMonth = createSelector(
     (state: RootState) => state.Map.sentinel2AquisitionMonth,
     (sentinel2AquisitionMonth) => sentinel2AquisitionMonth
+);
+
+export const selectSentinel2AquisitionDay = createSelector(
+    (state: RootState) => state.Map.sentinel2AquisitionDay,
+    (sentinel2AquisitionDay) => sentinel2AquisitionDay
 );
 
 export const selectMapMode = createSelector(

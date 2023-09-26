@@ -78,7 +78,7 @@ const LayerSelector: FC<Props> = ({
                     onClickHandler={landcoverButtonOnClick}
                     active={!shouldShowSentinel2Layer}
                 >
-                    Land Cover
+                    Classificação
                 </LayerSelectorButton>
 
                 <div className={ICONS_CONATINER_CLASSNAMES}>
@@ -116,7 +116,7 @@ const LayerSelector: FC<Props> = ({
                     onClickHandler={imageryButtonOnClick}
                     active={shouldShowSentinel2Layer}
                 >
-                    Imagery
+                    Imagem
                 </LayerSelectorButton>
 
                 <div className={ICONS_CONATINER_CLASSNAMES}>

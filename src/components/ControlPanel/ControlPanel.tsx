@@ -11,7 +11,7 @@ import Tooltip from './Tooltip/TooltipContainer';
 import ToggleButton from './ToggleButton/ToggleButtonContainer';
 import { selectShouldHideControlPanel } from '../../store/UI/selectors';
 import ActionBar from './ActionBar/ActionBar';
-import Sentinel2LayerRasterFunctionsList from './Sentinel2LayerRasterFunctionsList/Sentinel2LayerRasterFunctionsListContainer';
+// import Sentinel2LayerRasterFunctionsList from './Sentinel2LayerRasterFunctionsList/Sentinel2LayerRasterFunctionsListContainer';
 import LandCoverGraph from './LandCoverGraph/LandCoverGraphContainer';
 
 const ControlPanel = () => {
@@ -35,17 +35,19 @@ const ControlPanel = () => {
                             <LayerSelector />
                             <TimeSlider />
                         </div>
-
+                        {/* Widget de Renderização | Filtro por classe | Gráfico */}
                         <div className="flex flex-col-reverse md:flex-row pb-6 md:pb-0">
-                            {shouldShowSentinel2Layer === false && (
+                            {/* {shouldShowSentinel2Layer === false && (
                                 <ClassificationsList />
-                            )}
+                            )} */}
 
+                            {/*
                             {shouldShowSentinel2Layer && (
                                 <Sentinel2LayerRasterFunctionsList />
                             )}
+                            */}
 
-                            <LandCoverGraph />
+                            {/* <LandCoverGraph /> */}
                         </div>
                     </div>
 

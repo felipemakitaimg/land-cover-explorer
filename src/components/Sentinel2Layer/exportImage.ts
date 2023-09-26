@@ -6,7 +6,7 @@ import {
     SENTINEL_2_IMAGE_SERVICE_URL,
 } from './config';
 
-const { AcquisitionDate, CloudCover } = SENTINEL_2_IMAGE_SERVICE_FIELD_NAMES;
+const { AcquisitionDate } = SENTINEL_2_IMAGE_SERVICE_FIELD_NAMES;
 
 type ExportImageParams = {
     /**
@@ -60,7 +60,7 @@ export const getMosaicRuleByAcquisitionDate = (
             'yyyy-MM-dd'
         )} 06:00:00' AND timestamp '${format(endDate, 'yyyy-MM-dd')} 05:59:59'`,
         // sort by cloud cover to get imagery with least cloud coverage
-        sortField: CloudCover,
+        // sortField: null,
         sortValue: 0,
         ascending: true,
         mosaicOperation: 'MT_FIRST',

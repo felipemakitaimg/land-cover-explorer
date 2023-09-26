@@ -3,33 +3,52 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
-import { sentinel2AquisitionMonthChanged } from '../../../store/Map/reducer';
-import { selectSentinel2AquisitionMonth } from '../../../store/Map/selectors';
-import { saveActiveMonthToHashParams } from '../../../utils/URLHashParams';
+import { sentinel2AquisitionDayChanged } from '../../../store/Map/reducer';
+import { selectSentinel2AquisitionDay } from '../../../store/Map/selectors';
+import { saveActiveDayToHashParams } from '../../../utils/URLHashParams';
 
-const MONTH_ABBR = [
-    'JAN',
-    'FEV',
-    'MAR',
-    'ABR',
-    'MAI',
-    'JUN',
-    'JUL',
-    'AGO',
-    'SET',
-    'OUT',
-    'NOV',
-    'DEZ',
+const DAY_ABBR = [
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '09',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+    '21',
+    '22',
+    '23',
+    '24',
+    '25',
+    '26',
+    '27',
+    '28',
+    '29',
+    '30',
+    '31',
 ];
 
 type Props = {
     disabled?: boolean;
 };
 
-const MonthPicker: FC<Props> = ({ disabled }: Props) => {
+const DayPicker: FC<Props> = ({ disabled }: Props) => {
     const dispatch = useDispatch();
 
-    const month = useSelector(selectSentinel2AquisitionMonth);
+    const day = useSelector(selectSentinel2AquisitionDay);
 
     const [shouldShowOptions, setShouldShowOptions] = useState(false);
 
@@ -40,8 +59,8 @@ const MonthPicker: FC<Props> = ({ disabled }: Props) => {
     });
 
     useEffect(() => {
-        saveActiveMonthToHashParams(month);
-    }, [month]);
+        saveActiveDayToHashParams(day);
+    }, [day]);
 
     return (
         <div
@@ -56,7 +75,7 @@ const MonthPicker: FC<Props> = ({ disabled }: Props) => {
                     setShouldShowOptions(true);
                 }}
             >
-                <span className="mr-1">{MONTH_ABBR[month - 1]}</span>
+                <span className="mr-1">{DAY_ABBR[day - 1]}</span>
 
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -71,21 +90,19 @@ const MonthPicker: FC<Props> = ({ disabled }: Props) => {
 
             {shouldShowOptions && (
                 <div className="absolute bottom-0 left-0 right-0 bg-custom-background border border-custom-light-blue-50 border-b-0 text-xs">
-                    {MONTH_ABBR.map((monthAbbr, index) => {
+                    {DAY_ABBR.map((dayAbbr, index) => {
                         return (
                             <div
                                 className="p-1 border-custom-light-blue-50 border-b cursor-pointer"
-                                key={monthAbbr}
+                                key={dayAbbr}
                                 onClick={() => {
                                     dispatch(
-                                        sentinel2AquisitionMonthChanged(
-                                            index + 1
-                                        )
+                                        sentinel2AquisitionDayChanged(index + 1)
                                     );
                                     setShouldShowOptions(false);
                                 }}
                             >
-                                {monthAbbr}
+                                {dayAbbr}
                             </div>
                         );
                     })}
@@ -95,4 +112,4 @@ const MonthPicker: FC<Props> = ({ disabled }: Props) => {
     );
 };
 
-export default MonthPicker;
+export default DayPicker;

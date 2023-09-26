@@ -22,62 +22,62 @@ type Props = {
     disabled?: boolean;
 };
 
-const Sentinel2LayerRasterFunctionsList: FC<Props> = ({
-    data,
-    selectedRasterFunction,
-    disabled,
-    onSelect,
-    itemOnHover,
-}: Props) => {
-    const containerRef = useRef<HTMLDivElement>();
-    useGetTooltipPositionOnHover(containerRef);
+// const Sentinel2LayerRasterFunctionsList: FC<Props> = ({
+//     data,
+//     selectedRasterFunction,
+//     disabled,
+//     onSelect,
+//     itemOnHover,
+// }: Props) => {
+//     const containerRef = useRef<HTMLDivElement>();
+//     useGetTooltipPositionOnHover(containerRef);
 
-    return (
-        <div className="text-center mx-4 my-4 md:my-0" ref={containerRef}>
-            <HeaderText
-                title="Visual Renderings"
-                subTitle="Click to Toggle Visibility"
-            />
+//     return (
+//         <div className="text-center mx-4 my-4 md:my-0" ref={containerRef}>
+//             <HeaderText
+//                 title="Renderizações"
+//                 subTitle="Click to Toggle Visibility"
+//             />
 
-            <div
-                className={classNames('grid grid-cols-2 h-28 text-sm mt-4', {
-                    'disabled-when-animation-mode-is-on': disabled,
-                })}
-            >
-                {data.map((d) => {
-                    const { name, label, description, thumbnail } = d;
+//             <div
+//                 className={classNames('grid grid-cols-2 h-28 text-sm mt-4', {
+//                     'disabled-when-animation-mode-is-on': disabled,
+//                 })}
+//             >
+//                 {data.map((d) => {
+//                     const { name, label, description, thumbnail } = d;
 
-                    const isSelected = name === selectedRasterFunction;
+//                     const isSelected = name === selectedRasterFunction;
 
-                    return (
-                        <div
-                            key={name}
-                            className={classNames(
-                                'flex items-center mx-6 mb-2 cursor-pointer',
-                                {
-                                    'opacity-50':
-                                        selectedRasterFunction &&
-                                        isSelected === false,
-                                }
-                            )}
-                            onClick={onSelect.bind(null, name)}
-                            onMouseEnter={() => {
-                                itemOnHover({
-                                    content: description,
-                                });
-                            }}
-                            onMouseLeave={() => {
-                                itemOnHover(null);
-                            }}
-                        >
-                            <img src={thumbnail} />
-                            <span className="ml-2">{label}</span>
-                        </div>
-                    );
-                })}
-            </div>
-        </div>
-    );
-};
+//                     return (
+//                         <div
+//                             key={name}
+//                             className={classNames(
+//                                 'flex items-center mx-6 mb-2 cursor-pointer',
+//                                 {
+//                                     'opacity-50':
+//                                         selectedRasterFunction &&
+//                                         isSelected === false,
+//                                 }
+//                             )}
+//                             onClick={onSelect.bind(null, name)}
+//                             onMouseEnter={() => {
+//                                 itemOnHover({
+//                                     content: description,
+//                                 });
+//                             }}
+//                             onMouseLeave={() => {
+//                                 itemOnHover(null);
+//                             }}
+//                         >
+//                             <img src={thumbnail} />
+//                             <span className="ml-2">{label}</span>
+//                         </div>
+//                     );
+//                 })}
+//             </div>
+//         </div>
+//     );
+// };
 
-export default Sentinel2LayerRasterFunctionsList;
+// export default Sentinel2LayerRasterFunctionsList;

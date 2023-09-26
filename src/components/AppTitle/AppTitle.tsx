@@ -56,7 +56,10 @@ const AppTitle = () => {
                     'theme-background p-1 px-2 text-lg font-light flex items-center h-app-header-size flex-grow md:flex-grow-0'
                 )}
             >
-                <span>Esri | Sentinel-2 Land Cover Explorer</span>
+                <span>
+                    COPEL | Acompanhamento da Detecção de Mudanças - Faixa de
+                    Servidão
+                </span>
             </div>
         </div>
     );

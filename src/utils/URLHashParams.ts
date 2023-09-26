@@ -11,19 +11,13 @@ type UrlHashParamKey =
     | 'mode'
     | 'year'
     | 'month'
+    | 'day'
     | 'renderingRule'
     | 'animation'
     | 'region'
     | 'saveWebMap';
 
-const SupportedSentinel2RasterFunctions: Sentinel2RasterFunction[] = [
-    'Natural Color with DRA',
-    'Agriculture with DRA',
-    'Color Infrared with DRA',
-    'Short-wave Infrared with DRA',
-    'NDVI Colormap',
-    'NDMI Colorized',
-];
+const SupportedSentinel2RasterFunctions: Sentinel2RasterFunction[] = ['None'];
 
 let hashParams: URLSearchParams = null; //new URLSearchParams(window.location.hash.slice(1));
 
@@ -143,6 +137,10 @@ export const getActiveYearFromHashParams = () => {
 
 export const saveActiveMonthToHashParams = (month: number) => {
     updateHashParams('month', month?.toString());
+};
+
+export const saveActiveDayToHashParams = (day: number) => {
+    updateHashParams('day', day?.toString());
 };
 
 export const getActiveMonthFromHashParams = () => {

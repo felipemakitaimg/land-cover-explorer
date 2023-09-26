@@ -7,6 +7,12 @@ type TimeInfo = {
     defaultTimeIntervalUnits: string;
 };
 
+type DayInfo = {
+    timeExtent: number[];
+    defaultTimeInterval: number;
+    defaultTimeIntervalUnits: string;
+};
+
 export type TimeExtentData = {
     /**
      * start time in unix time stampe
@@ -22,6 +28,7 @@ export type TimeExtentData = {
  * Sentinel2_10m_LandCover's Time Info
  */
 let timeInfo: TimeInfo;
+let dayInfo: DayInfo;
 
 /**
  * List of years that there are data available from Sentinel2_10m_LandCover layer
@@ -32,6 +39,8 @@ let timeInfo: TimeInfo;
  * ```
  */
 let availableYears: number[] = [];
+const availableMonths: number[] = [];
+let availableDays: number[] = [];
 
 /**
  * Load Time Info from Sentinel2_10m_LandCover's JSON
@@ -41,9 +50,8 @@ let availableYears: number[] = [];
  */
 export const loadTimeInfo = async (): Promise<TimeInfo> => {
     const requestURL = SENTINEL_2_LANDCOVER_10M_IMAGE_SERVICE_URL + '?f=json';
-
+    // axios (requisicao python)
     const res = await fetch(requestURL);
-
     const data = await res.json();
 
     timeInfo = data?.timeInfo;
@@ -51,6 +59,56 @@ export const loadTimeInfo = async (): Promise<TimeInfo> => {
     availableYears = populateAvailableYears(timeInfo.timeExtent);
 
     return timeInfo;
+};
+
+// TODO ADICIONAR INPUT DE MÊS/ANO PARA UTILIZAR NA QUERY E RETORNAR SOMENTE OS DIAS DO MÊS/ANO FORNECIDO
+export const loadDayInfo = async (): Promise<TimeInfo> => {
+    const requestURL =
+        SENTINEL_2_LANDCOVER_10M_IMAGE_SERVICE_URL +
+        '/query?where=1%3D1&outFields=Data&returnGeometry=false&returnDistinctValues=true' +
+        '&f=json';
+    console.log(requestURL);
+    // axios (requisicao python)
+    const res = await fetch(requestURL);
+    const data = await res.json();
+    // TODO CONVERTER TIMESTAMP EM DATAS
+    // TODO CRIAR FUNÇÃO PARA RETORNAR SOMENTE OS DIAS
+    //  TODO CALCULAR DIAS ÚNICOS E RETORNAR COMO "availableDays"
+    dayInfo = data?.dayInfo;
+
+    availableDays = populateAvailableDays();
+    // availableDays = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,]
+
+    return dayInfo;
+};
+
+/**
+ * Get list of days between start and end date from the time extent
+ *
+ * @param timeExtent Time Extent from Sentinel2_10m_LandCover's Time Info
+ * @returns
+ */
+// TODO ADAPTAR PARA POPULAR COM DIAS
+export const populateAvailableDays = () => {
+    // const [start, end] = timeExtent;
+
+    // const startYear = new Date(start).getFullYear();
+
+    // const endYear = new Date(end).getFullYear();
+
+    const days = [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+        21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+    ];
+
+    // let day = startYear;
+
+    // while (day <= endYear) {
+    //     days.push(day);
+    //     day++;
+    // }
+
+    return days;
 };
 
 /**
@@ -134,4 +192,8 @@ export const getTimeExtentByYear = async (
  */
 export const getAvailableYears = () => {
     return [...availableYears];
+};
+
+export const getAvailableDays = () => {
+    return [...availableDays];
 };

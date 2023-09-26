@@ -47,8 +47,8 @@
 .esri-time-slider__mode--time-window .esri-slider__segment-0,
 .esri-time-slider__mode--instant .esri-slider__segment-0,
 .esri-time-slider__mode--instant .esri-slider__segment-1 {
-  background-color: #00232f;
-  border: 1px solid #193d49;
+  background-color: #ffffff;
+  border: 1px solid #000000;
 }
 
 #timeSliderDiv .esri-slider__thumb {

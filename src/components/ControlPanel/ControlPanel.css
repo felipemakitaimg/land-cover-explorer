@@ -5,13 +5,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(0deg, rgba(0,21,28,1) 0%, rgba(0,21,28,0) 100%);
+    background: linear-gradient(0deg, rgb(248, 162, 100) 0%, rgba(156, 67, 2,0) 100%);
     z-index: 0;
 }
 
 .control-panel-top-shadow {
     height: 10px;
-    background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(0,0,0,0) 100%);
     z-index: 0;
 }
 

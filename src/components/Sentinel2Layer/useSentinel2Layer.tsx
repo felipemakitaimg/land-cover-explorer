@@ -19,18 +19,19 @@ type UseLandCoverLayerParams = {
     // mapView?: IMapView;
 };
 
-const { AcquisitionDate, CloudCover } = SENTINEL_2_IMAGE_SERVICE_FIELD_NAMES;
+const { AcquisitionDate } = SENTINEL_2_IMAGE_SERVICE_FIELD_NAMES;
 
 export const createMosaicRuleByYear = (year: number, month: number) => {
     // const monthStr = month < 10 ? '0' + month : month.toString();
 
-    const { where, sortField, sortValue, ascending } =
-        getMosaicRuleByAcquisitionDate(year, month);
+    const { where, sortValue, ascending } = getMosaicRuleByAcquisitionDate(
+        year,
+        month
+    );
 
     return {
         method: `attribute`,
         where,
-        sortField,
         sortValue,
         ascending,
     };

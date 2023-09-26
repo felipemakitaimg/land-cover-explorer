@@ -1,5 +1,5 @@
 import { loadRasterAttributeTable } from './rasterAttributeTable';
-import { loadTimeInfo } from './timeInfo';
+import { loadTimeInfo, loadDayInfo } from './timeInfo';
 
 /**
  * Load service information (Raster Attributes, Time Extent and etc) of Sentinel-2-10m-Landcover layer
@@ -7,4 +7,6 @@ import { loadTimeInfo } from './timeInfo';
 export const loadServiceInfo = async () => {
     await loadRasterAttributeTable();
     await loadTimeInfo();
+    await loadDayInfo();
+    // TODO loadMonthInfo()
 };
